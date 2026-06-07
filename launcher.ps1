@@ -60,13 +60,13 @@ function Boot-Sequence {
     Write-Host "$P$B  ╔════════════════════════════════════════════════════════╗$R"
     foreach ($line in $art) {
         Write-Host "$P$B  ║$C$B$line$P$B  ║$R"
-        Start-Sleep -Ms 35
+        Start-Sleep -Milliseconds 35
     }
     Write-Host "$P$B  ║$LP$B          VR EXPLOIT SUITE  //  ANIMAL COMPANY         $P$B║$R"
     Write-Host "$P$B  ║$GR          [ INJECTION FRAMEWORK v3.0 ]                  $P$B║$R"
     Write-Host "$P$B  ╚════════════════════════════════════════════════════════╝$R"
     Write-Host ""
-    Start-Sleep -Ms 300
+    Start-Sleep -Milliseconds 300
 
     $checks = @(
         "LOADING IL2CPP BRIDGE...................."
@@ -78,14 +78,14 @@ function Boot-Sequence {
     )
     foreach ($chk in $checks) {
         Write-Host -NoNewline "$GR  $DIM[$YL....$GR]$R $W$chk$R"
-        Start-Sleep -Ms (Get-Random -Min 60 -Max 180)
+        Start-Sleep -Milliseconds (Get-Random -Min 60 -Max 180)
         Write-Host "`r$GR  [$G OK $GR]$R $W$chk$R"
     }
     Write-Host ""
     Write-Host "$P$B  ══════════════════════════════════════════════════════════$R"
     Write-Host "$LP$B  >> SUPA MENU READY. ALL SYSTEMS NOMINAL.                 $R"
     Write-Host "$P$B  ══════════════════════════════════════════════════════════$R"
-    Start-Sleep -Ms 700
+    Start-Sleep -Milliseconds 700
 }
 
 # ── NETWORK UTILS ─────────────────────────────────────────────────
@@ -133,13 +133,10 @@ function Do-Auth {
 
     Write-Host -NoNewline "$P$B  ║$R $GR  Scanning hardware...$R"
     $hwid = Get-HWID
-    Start-Sleep -Ms 450
+    Start-Sleep -Milliseconds 450
     Write-Host "`r$P$B  ║$R $GR  Hardware ID:$R $C$B$hwid$R"
 
-    Write-Host -NoNewline "$P$B  ║$R $GR  Fetching network info...$R"
-    $ip = Get-IP
-    Start-Sleep -Ms 300
-    Write-Host "`r$P$B  ║$R $GR  IP Address  :$R $W$ip$R                                      "
+    Start-Sleep -Milliseconds 300
 
     Write-Host "$P$B  ╠════════════════════════════════════════════════════════╣$R"
     Write-Host "$P$B  ║$R"
@@ -152,11 +149,11 @@ function Do-Auth {
     Write-Host "$P$B  ║$R"
     Write-Host -NoNewline "$P$B  ║$R  $DP  Authenticating...$R"
     Send-Log $u $ip $hwid "auth" $null
-    Start-Sleep -Ms 600
+    Start-Sleep -Milliseconds 600
     Write-Host "`r$P$B  ║$R  $G  ✓ Authenticated as $LP$B$u$R                                  "
     Write-Host "$P$B  ║$R"
     Write-Host "$P$B  ╚════════════════════════════════════════════════════════╝$R"
-    Start-Sleep -Ms 500
+    Start-Sleep -Milliseconds 500
     return @{ user=$u; hwid=$hwid; ip=$ip }
 }
 
@@ -198,14 +195,14 @@ function Do-LicensePrompt($auth) {
     Write-Host "$P$B  ║$R"
     Write-Host -NoNewline "$P$B  ║$R  $DP  Verifying against license server...$R"
     $res = Validate-License $code $auth.hwid
-    Start-Sleep -Ms 700
+    Start-Sleep -Milliseconds 700
 
     switch ($res) {
         "VALID" {
             Write-Host "`r$P$B  ║$R  $G  ✓ License valid — HWID matched. Welcome.$R                   "
             Send-Log $auth.user $auth.ip $auth.hwid "paid" $raw
             Write-Host "$P$B  ╚════════════════════════════════════════════════════════╝$R"
-            Start-Sleep -Ms 500; return $true
+            Start-Sleep -Milliseconds 500; return $true
         }
         "UNCLAIMED" {
             Write-Host "`r$P$B  ║$R  $YL  ⚡ First use — license accepted. HWID registered.$R           "
@@ -259,7 +256,7 @@ function Do-Inject($auth, $tier) {
         $dl = Download-File $s.url $s.dest
         if ($dl) { Write-Host "`r$P$B  ║$R  $GR[$G OK  $GR]$R $W$($s.label)$R" }
         else      { Write-Host "`r$P$B  ║$R  $GR[$RD FAIL$GR]$R $W$($s.label)$R"; $ok = $false }
-        Start-Sleep -Ms (Get-Random -Min 80 -Max 220)
+        Start-Sleep -Milliseconds (Get-Random -Min 80 -Max 220)
     }
 
     Write-Host "$P$B  ║$R"
