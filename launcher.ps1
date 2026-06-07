@@ -1,4 +1,5 @@
 # ═══════════════════════════════════════════════════════════════════
+# v3.1 — fixed Sleep, hidden IP
 #   SUPA MENU  //  ANIMAL COMPANY  //  INJECTION FRAMEWORK v3.0
 # ═══════════════════════════════════════════════════════════════════
 $URL_BRIDGE    = "https://raw.githubusercontent.com/DoomSpir/supa-menu-host/main/frida-il2cpp-bridge.js"
